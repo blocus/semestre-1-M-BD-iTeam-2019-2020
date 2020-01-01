@@ -29,32 +29,25 @@ for a in range(1993, 2017):
                     data[key].add_ouverture(a, m+1, j, l[2])
             except:
                 pass
-i = 0
 
-fig, ax = plt.subplots()
-lines = []
+fig, axs = plt.subplots(nrows=2, ncols=1, sharex=True, sharey=True)
 x = np.arange('2016-01-01', '2016-12-31', dtype='datetime64[D]')
-k = 'ES0109429037'
-l = []
-old = 0
+keys = ['ES0109429037', 'FR0010425595']
+
+lists = [[], []]
+olds = [0, 0]
 for d in list(x):
     date = str(d).split('-')
     print(date)
-    v = data[k].ouvertures[int(date[0])][int(date[1])][int(date[2])-1]
-    if v != None:
-        old = v
-    l.append(old)
-print(l)
+    for i in range(2):
+        k = keys[i]
+        v = data[k].ouvertures[int(date[0])][int(date[1])][int(date[2])-1]
+        if v != None:
+            olds[i] = v
+        lists[i].append(olds[i])
 
-# # x = np.arange(1, 13, 1)
-# for k in data:
-#     if i > 10:
-#         break
-#     i += 1
-#     data[k].show_ouverture()
-#     y = data[k].data_annee(2016)
-ax.plot(x, l, label=data[k].libele)
-#
-ax.legend()
+for i in range(2):
+    axs[i].plot(x, lists[i], label=data[keys[i]].libele)
+    axs[i].legend()
+
 plt.show()
-# print(data)

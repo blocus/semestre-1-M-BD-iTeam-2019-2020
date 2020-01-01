@@ -1,11 +1,12 @@
 class Entreprise:
     id = None
     libele = None
-    ouvertures = dict()
+    ouvertures = None
 
     def __init__(self, id, libele):
         self.id = id
         self.libele = libele
+        self.ouvertures = {}
 
     def add_ouverture(self, annee, mois, jour, valeur):
         if annee not in self.ouvertures:
